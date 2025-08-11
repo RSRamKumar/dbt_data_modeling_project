@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+    - name: jaffle
+      schema: RAW_SCHEMA
+      tables:
+        - name: customers
+          identifiers: raw_customers
+
+        - name: orders
+          identifiers: RAW_ORDERS
+
+        - name: order_items
+          identifiers: RAW_ORDER_ITEMS
+
+        - name: products
+          identifiers: RAW_PRODUCTS
+
+        - name: supplies
+          identifiers: RAW_SUPPLIES
+
+        - name: stores
+          identifiers: RAW_STORES
