@@ -6,7 +6,7 @@ with raw_customers
         select
             *
 
-        from  jaffle.raw_schema.raw_customers
+        from {{ source('jaffle', 'customers') }} --jaffle.raw_schema.raw_customers
 
     )
 

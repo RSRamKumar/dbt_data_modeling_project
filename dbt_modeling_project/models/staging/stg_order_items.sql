@@ -1,14 +1,14 @@
-with raw_order_items 
-as (
+with raw_order_items
+    as (
 
-    select 
-* 
+        select
+            *
 
-    from jaffle.raw_schema.raw_order_items
+        from {{ source('jaffle', 'order_items') }} -- jaffle.raw_schema.raw_order_items
 
-)
+    )
 
-select 
+select
 
     id as order_item_id,
 
@@ -16,7 +16,7 @@ select
 
     sku as product_id,
 
-    current_timestamp() 
-as load_timestamp
+    current_timestamp()
+    as load_timestamp
 
 from raw_order_items

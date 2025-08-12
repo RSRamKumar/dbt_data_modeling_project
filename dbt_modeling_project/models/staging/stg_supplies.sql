@@ -1,27 +1,27 @@
-with raw_supplies 
-as (
+with raw_supplies
+    as (
 
-    select 
-* 
+        select
+            *
 
-    from jaffle.raw_schema.raw_supplies
+        from {{ source('jaffle', 'supplies') }} --jaffle.raw_schema.raw_supplies
 
-)
+    )
 
-select 
+select
 
     id as supply_id,
 
-    name 
-as supply_name,
+    name
+    as supply_name,
 
     cost as supply_cost,
 
-    perishable  as is_product_perishable,
+    perishable as is_product_perishable,
 
     sku as product_id,
 
-    current_timestamp() 
-as load_timestamp
+    current_timestamp()
+    as load_timestamp
 
 from raw_supplies

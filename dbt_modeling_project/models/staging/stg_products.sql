@@ -1,29 +1,29 @@
-with raw_products 
-as (
+with raw_products
+    as (
 
-    select 
-* 
+        select
+            *
 
-    from jaffle.raw_schema.raw_products
+        from {{ source('jaffle', 'products') }} -- jaffle.raw_schema.raw_products
 
-)
+    )
 
-select 
+select
 
     sku as product_id,
 
-    name 
-as product_name,
+    name
+    as product_name,
 
-    type 
-as product_type,
+    type
+    as product_type,
 
     price as product_price,
 
-    description 
-as product_description,
+    description
+    as product_description,
 
-    current_timestamp() 
-as load_timestamp
+    current_timestamp()
+    as load_timestamp
 
 from raw_products

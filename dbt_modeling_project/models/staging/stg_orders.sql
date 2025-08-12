@@ -1,14 +1,14 @@
-with raw_orders 
-as (
+with raw_orders
+    as (
 
-    select 
-* 
+        select
+            *
 
-    from jaffle.raw_schema.raw_orders
+        from {{ source('jaffle', 'orders') }} --jaffle.raw_schema.raw_orders
 
-)
+    )
 
-select 
+select
 
     id as order_id,
 
@@ -24,8 +24,8 @@ select
 
     order_total,
 
-    current_timestamp() 
-as load_timestamp
+    current_timestamp()
+    as load_timestamp
 
 from raw_orders
 

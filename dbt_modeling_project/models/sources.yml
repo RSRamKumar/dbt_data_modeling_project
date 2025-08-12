@@ -5,19 +5,19 @@ sources:
       schema: RAW_SCHEMA
       tables:
         - name: customers
-          identifiers: raw_customers
+          identifier: RAW_CUSTOMERS
 
         - name: orders
-          identifiers: RAW_ORDERS
+          identifier: RAW_ORDERS
 
         - name: order_items
-          identifiers: RAW_ORDER_ITEMS
+          identifier: RAW_ORDER_ITEMS
 
         - name: products
-          identifiers: RAW_PRODUCTS
+          identifier: RAW_PRODUCTS
 
         - name: supplies
-          identifiers: RAW_SUPPLIES
+          identifier: RAW_SUPPLIES
 
         - name: stores
-          identifiers: RAW_STORES
+          identifier: RAW_STORES
