@@ -14,7 +14,7 @@ select
 
     customer as customer_id,
 
-    ordered_at,
+    ordered_at as order_date,
 
     store_id,
 
@@ -22,7 +22,7 @@ select
 
     tax_paid,
 
-    order_total,
+    order_total as order_total_amount,
 
     current_timestamp()
     as load_timestamp
