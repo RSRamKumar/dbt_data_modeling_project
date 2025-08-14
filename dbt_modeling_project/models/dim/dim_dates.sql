@@ -11,7 +11,7 @@ with date_spine as (
 
 select
     date_day as date_actual,
-    to_char(date_day, 'YYYYMMDD')    as date_id,
+    to_char(date_day, 'YYYYMMDD')    as date_sk,
     extract(year from date_day)        as year,
     extract(month from date_day)       as month,
     extract(day from date_day)         as day,
