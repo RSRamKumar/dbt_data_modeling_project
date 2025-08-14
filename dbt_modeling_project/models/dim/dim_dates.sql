@@ -11,13 +11,13 @@ with date_spine as (
 
 select
     date_day as date_actual,
-    to_char(date_day, 'YYYY-MM-DD')::int as date_id,
+    to_char(date_day, 'YYYYMMDD')    as date_id,
     extract(year from date_day)        as year,
     extract(month from date_day)       as month,
     extract(day from date_day)         as day,
     to_char(date_day, 'Month')         as month_name,
     to_char(date_day, 'Dy')            as day_name,
     extract(quarter from date_day)     as quarter,
-    current_timestamp() as load_timestamp,
+    current_timestamp() as load_timestamp 
 from date_spine
 order by date_actual
