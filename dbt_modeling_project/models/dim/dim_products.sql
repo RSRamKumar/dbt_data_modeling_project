@@ -7,7 +7,7 @@ with product_info as (
 )
 
 select 
-    dbt_utils.surrogate_key([product_id, product_name, product_type, product_price ]) as product_sk,
+    {{ dbt_utils.generate_surrogate_key(['product_id', 'product_name', 'product_type', 'product_price' ]) }} as product_sk,
     product_id,
     product_name,
     product_type, 
