@@ -13,9 +13,9 @@ select
     product_type, 
     product_price,
     
-    current_date as effective_date,
+    to_date('01-12-2010', 'DD-MM-YYYY') as effective_date,
     null::date as end_date,
     true as is_current,
-    current_timestamp() as load_timestamp
+     
 
 from product_info 
