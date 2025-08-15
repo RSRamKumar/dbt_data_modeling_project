@@ -32,3 +32,6 @@ select
 from customer_orders
 group by store_id, location_name
 -- order by total_sales_amount desc
+
+
+
