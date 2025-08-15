@@ -32,6 +32,6 @@ select
     current_timestamp() as load_timestamp
 
 from enriched_orders eo
-    join dim_dates dd on eo.order_date::date = dd.date_actual
+    join dim_dates dd on eo.order_date = dd.date_actual
     join dim_customers dc on eo.customer_id = dc.customer_id
     and eo.order_date between dc.effective_date and coalesce(dc.end_date, current_date)
