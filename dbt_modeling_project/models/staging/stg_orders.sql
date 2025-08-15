@@ -14,7 +14,7 @@ select
 
     customer as customer_id,
 
-    ordered_at as order_date,
+    ordered_at::date as order_date,
 
     store_id,
 
