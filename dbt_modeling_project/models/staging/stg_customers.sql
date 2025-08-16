@@ -21,12 +21,13 @@ select
     DBT_UPDATED_AT,
     DBT_VALID_FROM,
     DBT_VALID_TO,
-    case when DBT_VALID_TO is null then true else false end as is_current
+    case when DBT_VALID_TO is null then true else false end as IS_CURRENT
 
 
 
 
 from raw_customers
 
+ 
 
-
+ 

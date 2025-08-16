@@ -28,7 +28,7 @@ with orders as (
     )
 select o.order_id, o.order_date, o.customer_id, c.customer_name, o.order_total_amount,
     og.number_of_jaffles, og.number_of_beverages, og.unique_products_count, og.total_items_count,
-    o.store_id, s.location_name, current_timestamp() as load_timestamp
+    o.store_id, s.location_name 
 
 from orders o
 

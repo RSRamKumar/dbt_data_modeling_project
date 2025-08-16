@@ -10,6 +10,5 @@ select
     customer_id,
     order_total_amount,
     order_date,
-    store_id,
-    current_timestamp() as load_timestamp
+    store_id
 from orders
