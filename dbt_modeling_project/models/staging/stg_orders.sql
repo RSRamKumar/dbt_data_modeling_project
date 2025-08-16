@@ -22,10 +22,7 @@ select
 
     tax_paid,
 
-    order_total as order_total_amount,
-
-    current_timestamp()
-    as load_timestamp
+    order_total as order_total_amount
 
 from raw_orders
 

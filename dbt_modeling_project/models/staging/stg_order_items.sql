@@ -14,9 +14,6 @@ select
 
     order_id,
 
-    sku as product_id,
-
-    current_timestamp()
-    as load_timestamp
+    sku as product_id
 
 from raw_order_items

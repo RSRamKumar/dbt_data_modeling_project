@@ -31,3 +31,7 @@ SELECT * FROM jaffle.dev_schema.scd_products WHERE sku='JAF-001' #}
 {# Raw / Sources → Snapshots → Staging → Intermediate → Dimensions → Facts 
 scd_layer acts between raw and staging layer and staging models are built on top of scd models
 #}
+
+{# 
+It’s best practice to snapshot only “slowly changing” business dimensions where attribute changes must be tracked historically.
+For transactional/event data (orders, order_items) → snapshots don’t make sense. #}

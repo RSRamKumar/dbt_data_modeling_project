@@ -19,9 +19,6 @@ select
 
     perishable as is_product_perishable,
 
-    sku as product_id,
-
-    current_timestamp()
-    as load_timestamp
+    sku as product_id 
 
 from raw_supplies

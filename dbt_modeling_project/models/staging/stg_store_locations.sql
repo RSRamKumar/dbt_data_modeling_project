@@ -16,9 +16,6 @@ select
     name
     as location_name,
 
-    opened_at as store_opened_time,
-
-    current_timestamp()
-    as load_timestamp
+    opened_at as store_opened_time
 
 from raw_stores
