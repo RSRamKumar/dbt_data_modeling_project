@@ -17,6 +17,10 @@ select
     name
     as customer_name,
 
+    lower(
+        split_part(name, ' ', 1) | | '.' | | split_part(name, ' ', 2)
+    ) | | '@email.com' as customer_email,
+
     DBT_SCD_ID,
     DBT_UPDATED_AT,
     DBT_VALID_FROM,
@@ -28,6 +32,5 @@ select
 
 from raw_customers
 
- 
 
- 
+
