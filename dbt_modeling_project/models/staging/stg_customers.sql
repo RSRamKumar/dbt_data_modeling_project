@@ -6,7 +6,7 @@ with raw_customers
         select
             *
 
-        from {{ ref('scd_customers') }}
+        from {{ ref('scd_customers') }} -- jaffle.dev_schema.scd_customers
 
     )
 
