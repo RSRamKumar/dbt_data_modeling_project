@@ -28,4 +28,6 @@ SELECT * FROM jaffle.raw_schema.raw_products WHERE sku='JAF-001';
 UPDATE jaffle.raw_schema.raw_products SET  price=1021 WHERE  sku='JAF-001';
 SELECT * FROM jaffle.dev_schema.scd_products WHERE sku='JAF-001' #}
 
-{# Raw / Sources → Snapshots → Staging → Intermediate → Dimensions → Facts #}
+{# Raw / Sources → Snapshots → Staging → Intermediate → Dimensions → Facts 
+scd_layer acts between raw and staging layer and staging models are built on top of scd models
+#}
