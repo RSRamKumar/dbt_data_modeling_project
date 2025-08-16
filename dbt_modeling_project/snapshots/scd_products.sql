@@ -27,3 +27,5 @@ Tip:
 SELECT * FROM jaffle.raw_schema.raw_products WHERE sku='JAF-001';
 UPDATE jaffle.raw_schema.raw_products SET  price=1021 WHERE  sku='JAF-001';
 SELECT * FROM jaffle.dev_schema.scd_products WHERE sku='JAF-001' #}
+
+{# Raw / Sources → Snapshots → Staging → Intermediate → Dimensions → Facts #}

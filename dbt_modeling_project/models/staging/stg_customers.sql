@@ -6,7 +6,7 @@ with raw_customers
         select
             *
 
-        from {{ source('jaffle', 'customers') }} --jaffle.raw_schema.raw_customers
+        from {{ ref('scd_customers') }} --jaffle.raw_schema.raw_customers
 
     )
 
@@ -17,8 +17,12 @@ select
     name
     as customer_name,
 
-    current_timestamp()
-    as load_timestamp
+     DBT_SCD_ID, 
+     DBT_UPDATED_AT, 
+     DBT_VALID_FROM, 
+     DBT_VALID_TO
+
+     
 
 from raw_customers
 
