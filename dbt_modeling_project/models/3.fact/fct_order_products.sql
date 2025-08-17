@@ -1,5 +1,8 @@
 
--- fact_order_items.sql grain = 1 row per order item
+-- fact_order_items.sql 
+-- grain =  1 row per (order_id, product_id)  -- one record per unique product within an order
+
+
   with order_items as (
           select order_id, product_id from {{ ref('stg_order_items') }}
       ),
@@ -10,10 +13,10 @@
           select date_actual, date_sk from {{ ref('dim_dates') }}
       ),
       dim_products as (
-          select product_sk, product_id, product_price, effective_date, end_date from {{ ref('dim_products') }}
+          select product_sk, product_id, product_price,   from {{ ref('dim_products') }}
       ),
       dim_customers as (
-          select customer_sk, customer_id, effective_date, end_date from {{ ref('dim_customers') }}
+          select customer_sk, customer_id  from {{ ref('dim_customers') }}
       ),
       dim_stores as (
         select store_sk, store_id from {{ ref('dim_stores') }}
@@ -47,6 +50,8 @@
       dp.product_sk,
       ds.store_sk,
       dp.product_price
+
+   
 
 
 

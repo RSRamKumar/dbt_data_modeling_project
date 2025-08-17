@@ -14,7 +14,7 @@ with enriched_orders as (
         from {{ ref('inter_orders_enriched') }}
     ),
     dim_customers as (
-        select customer_sk, customer_id, effective_date, end_date from {{ ref('dim_customers') }}
+        select customer_sk, customer_id from {{ ref('dim_customers') }}
     ),
     dim_dates as (
         select date_actual, date_sk from {{ ref('dim_dates') }}
