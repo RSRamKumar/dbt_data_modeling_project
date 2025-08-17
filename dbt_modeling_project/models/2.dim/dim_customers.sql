@@ -1,4 +1,19 @@
 -- dim_customers.sql
+-- 1 row = 1 customer (current descriptive attributes only)
+
+select
+    {{ dbt_utils.generate_surrogate_key(['customer_id']) }} as customer_sk,
+    customer_id,
+    customer_name,
+    customer_email,
+    current_timestamp() as load_timestamp
+from {{ ref('stg_customers') }}
+where is_current = true
+
+
+{# 
+
+-- dim_customers.sql
 -- 1 row = 1 version of a customer (tracks SCD changes)
 
 with base as (
@@ -44,4 +59,4 @@ final as (
       on b.customer_id = o.customer_id
 )
 
-select * from final where customer_id = '4ae72884-7442-4556-8beb-39b3cfe549d5'
+select * from final where customer_id = '4ae72884-7442-4556-8beb-39b3cfe549d5' #}
