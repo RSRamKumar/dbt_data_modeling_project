@@ -1,4 +1,4 @@
--- inter_products_enriched.sql  
+-- inter_products_sales_agg.sql  
 -- 1 row = 1 product (with sales metrics)
 
 with items as (
@@ -20,11 +20,11 @@ item_sales as (
     select 
         i.product_id,
         count(i.order_item_id) as number_of_items_sold,
-        sum(p.product_price) as total_revenue  -- historical accuracy: summing the actual sold prices
+        sum(p.product_price) as total_revenue,     -- count(i.order_item_id) * p.product_price as cost historical accuracy: summing the actual sold prices
     from items i
     join products p
         on i.product_id = p.product_id
-    group by i.product_id
+    group by i.product_id 
 )
 
 select
@@ -32,9 +32,9 @@ select
     p.product_name,
     p.product_type,
     p.product_price,
-    s.number_of_items_sold,
-    s.total_revenue
+    coalesce(s.number_of_items_sold, 0) as number_of_items_sold,
+    coalesce(s.total_revenue, 0) as total_revenue
 from products p
 left join item_sales s
     on p.product_id = s.product_id
-order by s.total_revenue desc
+ 

@@ -14,11 +14,14 @@
       ),
       dim_customers as (
           select customer_sk, customer_id, effective_date, end_date from {{ ref('dim_customers') }}
-      )
+      ),
+      dim_stores as (
+        select store_sk, store_id from {{ ref('dim_stores') }}
+    )
 
 
 
-  select o.order_id, dd.date_sk, dc.customer_sk, dp.product_sk, o.store_id, count(*) as quantity,
+  select o.order_id, dd.date_sk, dc.customer_sk, dp.product_sk, ds.store_sk, count(*) as quantity,
       dp.product_price, count(*) * dp.product_price as item_total
 
   from order_items i
@@ -26,12 +29,14 @@
       on i.order_id = o.order_id
       join dim_customers dc on
       o.customer_id = dc.customer_id
-      and o.order_date between dc.effective_date and coalesce(dc.end_date, current_date)
+    --  and o.order_date between dc.effective_date and coalesce(dc.end_date, current_date)
       join dim_dates dd
       on o.order_date = dd.date_actual
       join dim_products dp
       on i.product_id = dp.product_id
-      and o.order_date between dp.effective_date and coalesce(dp.end_date, current_date)
+      -- and o.order_date between dp.effective_date and coalesce(dp.end_date, current_date)
+      join dim_stores ds 
+      on o.store_id = ds.store_id
 
  -- If order date is not between product effective date (date of insertion of products), query produces no results
 
@@ -40,7 +45,7 @@
       dd.date_sk,
       dc.customer_sk,
       dp.product_sk,
-      o.store_id,
+      ds.store_sk,
       dp.product_price
 
 

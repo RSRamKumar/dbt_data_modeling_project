@@ -26,5 +26,5 @@ select
     current_timestamp() as load_timestamp 
 
 from customer_orders
-group by store_id, location_name
+group by store_id 
 -- order by total_sales_amount desc
