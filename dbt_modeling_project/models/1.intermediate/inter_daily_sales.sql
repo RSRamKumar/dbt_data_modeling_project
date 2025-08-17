@@ -10,7 +10,7 @@ with customer_orders as (
         total_items_count,
         order_id,
         customer_id
-    from {{ ref('inter_customer_orders_enriched') }}
+    from {{ ref('inter_orders_enriched') }}
 )
 
 select

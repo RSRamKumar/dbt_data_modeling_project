@@ -11,7 +11,7 @@ with enriched_orders as (
             unique_products_count,
             total_items_count,
             store_id
-        from {{ ref('inter_customer_orders_enriched') }}
+        from {{ ref('inter_orders_enriched') }}
     ),
     dim_customers as (
         select customer_sk, customer_id, effective_date, end_date from {{ ref('dim_customers') }}
