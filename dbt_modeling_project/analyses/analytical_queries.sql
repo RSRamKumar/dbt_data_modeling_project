@@ -1,9 +1,12 @@
 
 
 -- Top selling Product by revenue
-select * from {{ ref('inter_product_sales_agg') }} where total_revenue = (
-        select max(total_revenue) from {{ ref('inter_product_sales_agg') }}
-    )
+select dp.product_name, dense_rank() over (order by  sum(fcp.item_total) desc) as rank
+from {{ ref('fct_order_products') }}  fcp
+join dim_products dp 
+using(product_sk)
+group by  fcp.product_sk, dp.product_name
+qualify rank <= 3
 
 -- Top 3 selling product by NUMBER_OF_ITEMS_SOLD
 with top_selling_product as (
