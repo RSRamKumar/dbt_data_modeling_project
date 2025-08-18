@@ -1,4 +1,4 @@
-🏪 Ecommerce Data Warehouse (Snowflake + dbt)
+# 🏪 Ecommerce Data Warehouse (Snowflake + dbt)
 
 ## 📌 Project Overview
 
