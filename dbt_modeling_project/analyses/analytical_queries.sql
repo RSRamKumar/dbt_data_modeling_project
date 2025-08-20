@@ -20,7 +20,7 @@ qualify rank <= 3
 
 
 -- Top 5 loyal customers
-select customer_name, count(*), dense_rank() over(order by count(*) desc) as rank 
+select customer_name, count(*) number_of_orders, dense_rank() over(order by count(*) desc) as rank 
 from fct_orders fc   
 join dim_customers dc 
 using (customer_sk)
@@ -30,7 +30,9 @@ qualify rank <= 5
  
 
 -- Top 5 customers with highest sales
-select customer_id, customer_name, sum(order_total_amount) total_purchase_amount
-from {{ ref('inter_orders_enriched') }}
-group by customer_id, customer_name
-order by total_purchase_amount desc limit 5
+select customer_name, sum(order_total_amount) as total_order_amount, dense_rank() over (order by sum(order_total_amount) desc ) as rank
+from fct_orders fo 
+join dim_customers dc 
+using(customer_sk)
+group by customer_name
+qualify rank <= 5
