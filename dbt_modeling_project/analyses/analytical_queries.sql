@@ -43,3 +43,38 @@ qualify rank <= 5
 
 
 select * from {{ ref('customer_orders_summary') }} limit 5
+
+
+
+-- Debug Pathways
+select order_id, count(*) 
+from fct_orders
+group by order_id
+having count(*) > 1;
+
+
+
+select order_id, count(*) 
+from inter_orders_enriched
+group by order_id
+having count(*) > 1;
+
+
+-- Step 3: check if any join (dates/customers/stores) multiplies rows
+with x as (
+  select
+    eo.order_id,
+    dd.date_sk,
+    dc.customer_sk,
+    ds.store_sk
+  from {{ ref('inter_orders_enriched') }} eo
+  join {{ ref('dim_dates') }}     dd on eo.order_date  = dd.date_actual
+  join {{ ref('dim_customers') }} dc on eo.customer_id = dc.customer_id
+  join {{ ref('dim_stores') }}    ds on eo.store_id    = ds.store_id
+)
+select order_id, count(*) as cnt
+from x
+group by order_id
+having count(*) > 1
+order by cnt desc, order_id;
+

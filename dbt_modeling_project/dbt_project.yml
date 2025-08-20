@@ -34,7 +34,7 @@ models:
     # Config indicated by + and applies to all files under models/example/
       silver:
         1.stg:
-          +materialized: ephemeral
+          +materialized: table 
       sliver:
         2.intermediate:
           +materialized: table
