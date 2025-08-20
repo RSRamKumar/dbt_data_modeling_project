@@ -19,14 +19,18 @@ qualify rank <= 3
 
 
 
--- Top 5 loyal customers
+-- Top 5 loyal customers (by number of orders)
 select customer_name, count(distinct fo.order_id) as number_of_orders, dense_rank() over(order by count(distinct fo.order_id) desc) as rank 
 from fct_orders fo  
 join dim_customers dc 
 using (customer_sk)
 group by customer_name
 qualify rank <= 5
- 
+
+
+select customer_name, lifetime_orders_count as number_of_orders, dense_rank() over(order by lifetime_orders_count desc) as rank
+from {{ ref('customer_orders_summary') }} 
+qualify rank <= 5
  
 
 -- Top 5 customers with highest sales
@@ -38,3 +42,4 @@ group by customer_name
 qualify rank <= 5
 
 
+select * from {{ ref('customer_orders_summary') }} limit 5
