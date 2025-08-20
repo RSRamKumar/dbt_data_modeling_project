@@ -20,8 +20,8 @@ qualify rank <= 3
 
 
 -- Top 5 loyal customers
-select customer_name, count(*) number_of_orders, dense_rank() over(order by count(*) desc) as rank 
-from fct_orders fc   
+select customer_name, count(distinct fo.order_id) as number_of_orders, dense_rank() over(order by count(distinct fo.order_id) desc) as rank 
+from fct_orders fo  
 join dim_customers dc 
 using (customer_sk)
 group by customer_name
@@ -36,3 +36,5 @@ join dim_customers dc
 using(customer_sk)
 group by customer_name
 qualify rank <= 5
+
+
