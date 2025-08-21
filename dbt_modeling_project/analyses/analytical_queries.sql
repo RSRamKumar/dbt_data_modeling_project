@@ -52,10 +52,17 @@ from {{ ref('customer_orders_summary') }}
 
 
 
-select * from {{ ref('customer_orders_summary') }} limit 5
+-- store had the highest total sales in 2020
+select 
+    ds.store_sk,
+    sum(dss.total_sales_amount) as yearly_sales
+from {{ ref('daily_sales_summary') }} dss
+join {{ ref('dim_stores') }} ds using(store_sk)
+join {{ ref('dim_dates') }} dd using(date_sk)
+where dd.year = 2020  
+group by ds.store_sk
+order by yearly_sales desc
+ 
 
 
-
-
-
-
+-- customers and no. of shops they visited
