@@ -1,0 +1,45 @@
+-- inter_daily_sales.sql
+-- Grain: 1 row per store_id per order_date
+
+with customer_orders as (
+        select
+            store_id,
+            location_name,
+            order_date,
+            order_total_amount,
+            total_items_count,
+            order_id,
+            customer_id
+        from {{ ref('inter_orders_enriched') }}
+    ),
+    dim_dates as (
+        select date_actual, date_sk from {{ ref('dim_dates') }}
+    ),
+    dim_stores as (
+        select store_sk, store_id from {{ ref('dim_stores') }}
+    )
+
+select
+    dd.date_sk,
+    ds.store_sk,
+
+
+    -- Core metrics
+    sum(order_total_amount) as total_sales_amount,
+    sum(total_items_count) as total_items_sold,
+    count(distinct order_id) as total_orders_count,
+    count(distinct customer_id) as unique_customers_count,
+
+    -- KPI metrics
+    round(sum(order_total_amount) / nullif(count(distinct order_id), 0), 2) as avg_order_value,
+    round(sum(total_items_count) / nullif(count(distinct order_id), 0), 2) as avg_items_per_order
+
+from customer_orders co
+    join dim_stores ds on co.store_id = ds.store_id
+    join dim_dates dd on co.order_date = dd.date_actual
+group by ds.store_sk, dd.date_sk
+-- order by order_date, total_sales_amount desc
+
+
+
+ 
