@@ -36,13 +36,20 @@ from {{ ref('customer_orders_summary') }}
 
 
 -- Top 5 customers with highest sales
-select customer_name, sum(order_total_amount) as total_order_amount,
+select dc.customer_id, dc.customer_name, sum(order_total_amount) as total_order_amount,
     dense_rank() over (order by sum(order_total_amount) desc) as rank
 from fct_orders fo
     join dim_customers dc
     using (customer_sk)
-group by customer_name
+group by dc.customer_id, dc.customer_name
     qualify rank <= 5
+
+-- Another method directly from mart
+select customer_name, lifetime_total_amount,
+    dense_rank() over (order by lifetime_total_amount desc) as rank
+from {{ ref('customer_orders_summary') }}
+    qualify rank <= 5
+
 
 
 select * from {{ ref('customer_orders_summary') }} limit 5
