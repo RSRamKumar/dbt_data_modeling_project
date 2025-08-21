@@ -66,3 +66,7 @@ order by yearly_sales desc
 
 
 -- customers and no. of shops they visited
+select customer_sk, count(distinct store_sk)
+from fct_orders 
+group by customer_sk
+having count(distinct store_sk) > 1
