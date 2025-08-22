@@ -22,3 +22,13 @@ select
     csb.customer_active_span
 from customer_summary_base csb
 join {{ ref('dim_customers') }} dc using (customer_sk)
+
+
+
+
+{# Mart Naming Convention
+Prefix by subject / domain:
+Eg: sales, customer, product, store
+
+Suffix by grain:
+Eg: _daily (1 row per day), _monthly (1 row per month), _summary (1 row per entity), _trend (time-series oriented mart) #}
