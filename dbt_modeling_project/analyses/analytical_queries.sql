@@ -56,7 +56,7 @@ from {{ ref('customer_orders_summary') }}
 select 
     ds.store_sk,
     sum(dss.total_sales_amount) as yearly_sales
-from {{ ref('daily_sales_summary') }} dss
+from {{ ref('sales_daily_summary') }} dss
 join {{ ref('dim_stores') }} ds using(store_sk)
 join {{ ref('dim_dates') }} dd using(date_sk)
 where dd.year = 2020  
