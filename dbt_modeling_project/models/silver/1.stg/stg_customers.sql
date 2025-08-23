@@ -34,3 +34,14 @@ from raw_customers
 
 
 
+{# stg = data cleaning & standardization
+(fix units, cast datatypes, rename columns, etc.)
+
+intermediate = enrichment & aggregations
+(combine facts, counts, rollups)
+
+dim/fact = modeling
+(define grain, surrogate keys)
+
+marts = business questions
+(metrics, KPIs, reporting) #}
