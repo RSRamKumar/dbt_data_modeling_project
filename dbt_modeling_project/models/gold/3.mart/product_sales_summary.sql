@@ -4,6 +4,7 @@
 with order_products as (
         select
             product_sk,
+            product_price,
             quantity,
             store_sk
         from  {{ ref('fct_order_products') }}
