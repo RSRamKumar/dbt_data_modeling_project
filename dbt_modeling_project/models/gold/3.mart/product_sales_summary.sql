@@ -16,9 +16,9 @@ with order_products as (
     select 
         op.product_sk,
         dp.product_name, 
-        sum(op.quantity) as total_quantity_sold,,
+        sum(op.quantity) as total_quantity_sold, 
         sum(op.quantity) * op.product_price as product_revenue
     from order_products op 
     join dim_products dp 
     on op.product_sk = dp.product_sk
-    group by  op.product_sk, dp.product_name 
+    group by  op.product_sk, dp.product_name, op.product_price

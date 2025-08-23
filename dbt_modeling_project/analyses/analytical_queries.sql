@@ -78,3 +78,11 @@ from fct_orders fo
 join dim_dates dd on fo.date_sk = dd.date_sk
 group by dd.month_name
 order by monthly_sales desc;
+
+
+-- Most Profitable Product type
+select dp.product_type, sum(pss.product_revenue) as total_revenue
+from product_sales_summary pss
+join dim_products dp on pss.product_sk = dp.product_sk
+group by dp.product_type
+order by total_revenue desc;
