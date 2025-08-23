@@ -18,11 +18,11 @@ select
 
     store_id,
 
-    sub_total,
+    {{ cents_to_euro('sub_total') }} as sub_total,
 
-    tax_paid,
+    {{ cents_to_euro('tax_paid') }} as tax_paid,
 
-    order_total as order_total_amount
+    {{ cents_to_euro('order_total') }} as order_total_amount
 
 from raw_orders
 
