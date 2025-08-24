@@ -72,12 +72,14 @@ group by customer_sk
 having count(distinct store_sk) > 1
 
 
+
 -- Monthly Sales Trend
 select dd.month_name, sum(fo.order_total_amount) as monthly_sales
 from fct_orders fo
 join dim_dates dd on fo.date_sk = dd.date_sk
 group by dd.month_name
 order by monthly_sales desc;
+
 
 
 -- Most Profitable Product type
