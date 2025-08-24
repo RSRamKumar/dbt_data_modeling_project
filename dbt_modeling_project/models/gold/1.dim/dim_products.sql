@@ -14,7 +14,7 @@ select
     product_type,
     product_price,
 
-    current_timestamp() as load_timestamp 
+    current_timestamp() as load_timestamp
 
 
 from product_info
