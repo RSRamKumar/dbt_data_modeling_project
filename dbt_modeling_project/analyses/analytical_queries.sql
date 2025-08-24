@@ -53,21 +53,21 @@ from {{ ref('customer_orders_summary') }}
 
 
 -- store had the highest total sales in 2020
-select 
+select
     ds.store_sk,
     sum(dss.total_sales_amount) as yearly_sales
 from {{ ref('sales_daily_summary') }} dss
-join {{ ref('dim_stores') }} ds using(store_sk)
-join {{ ref('dim_dates') }} dd using(date_sk)
-where dd.year = 2020  
+    join {{ ref('dim_stores') }} ds using (store_sk)
+    join {{ ref('dim_dates') }} dd using (date_sk)
+where dd.year = 2020
 group by ds.store_sk
 order by yearly_sales desc
- 
+
 
 
 -- customers and no. of shops they visited
 select customer_sk, count(distinct store_sk)
-from fct_orders 
+from fct_orders
 group by customer_sk
 having count(distinct store_sk) > 1
 
@@ -76,7 +76,7 @@ having count(distinct store_sk) > 1
 -- Monthly Sales Trend
 select dd.month_name, sum(fo.order_total_amount) as monthly_sales
 from fct_orders fo
-join dim_dates dd on fo.date_sk = dd.date_sk
+    join dim_dates dd on fo.date_sk = dd.date_sk
 group by dd.month_name
 order by monthly_sales desc;
 
@@ -85,7 +85,7 @@ order by monthly_sales desc;
 -- Most Profitable Product type
 select dp.product_type, sum(pss.product_revenue) as total_revenue
 from product_sales_summary pss
-join dim_products dp on pss.product_sk = dp.product_sk
+    join dim_products dp on pss.product_sk = dp.product_sk
 group by dp.product_type
 order by total_revenue desc;
 
@@ -94,6 +94,6 @@ order by total_revenue desc;
 -- Store with highest unique customers
 select ds.location_name, sss.unique_customers_count
 from sales_store_summary sss
-join dim_stores ds on sss.store_sk = ds.store_sk
+    join dim_stores ds on sss.store_sk = ds.store_sk
 order by sss.unique_customers_count desc
 limit 1;

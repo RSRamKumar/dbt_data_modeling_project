@@ -19,6 +19,6 @@ select
 
     perishable as is_product_perishable,
 
-    sku as product_id 
+    sku as product_id
 
 from raw_supplies

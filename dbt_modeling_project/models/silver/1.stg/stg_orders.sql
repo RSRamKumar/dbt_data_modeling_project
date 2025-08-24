@@ -14,7 +14,7 @@ select
 
     customer as customer_id,
 
-    to_date(ordered_at)  as order_date,
+    to_date(ordered_at) as order_date,
 
     store_id,
 

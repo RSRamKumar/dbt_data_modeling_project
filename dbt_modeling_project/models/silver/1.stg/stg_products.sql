@@ -1,16 +1,16 @@
 with raw_products as (
-    select
-        sku,
-        name,
-        type,
-        price,
-        description,
-        DBT_SCD_ID,
-        DBT_UPDATED_AT,
-        DBT_VALID_FROM,
-        DBT_VALID_TO
-    from {{ ref('scd_products') }}
-)
+        select
+            sku,
+            name,
+            type,
+            price,
+            description,
+            DBT_SCD_ID,
+            DBT_UPDATED_AT,
+            DBT_VALID_FROM,
+            DBT_VALID_TO
+        from {{ ref('scd_products') }}
+    )
 
 select
     sku as product_id,
