@@ -86,3 +86,12 @@ from product_sales_summary pss
 join dim_products dp on pss.product_sk = dp.product_sk
 group by dp.product_type
 order by total_revenue desc;
+
+
+
+-- Store with highest unique customers
+select ds.location_name, sss.unique_customers_count
+from sales_store_summary sss
+join dim_stores ds on sss.store_sk = ds.store_sk
+order by sss.unique_customers_count desc
+limit 1;
