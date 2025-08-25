@@ -18,8 +18,8 @@ select
     as customer_name,
 
     lower(
-        split_part(name, ' ', 1) | | '.' | | split_part(name, ' ', 2)
-    ) | | '@email.com' as customer_email,
+        split_part(name, ' ', 1) || '.' || split_part(name, ' ', 2)
+    ) || '@email.com' as customer_email,
 
     DBT_SCD_ID,
     DBT_UPDATED_AT,
@@ -44,4 +44,8 @@ dim/fact = modeling
 (define grain, surrogate keys)
 
 marts = business questions
-(metrics, KPIs, reporting) #}
+(metrics, KPIs, reporting) 
+
+https://docs.paradime.io/app-help/concepts/dbt-fundamentals/configuring-your-dbt-project/define-your-sources.yml
+#}
+

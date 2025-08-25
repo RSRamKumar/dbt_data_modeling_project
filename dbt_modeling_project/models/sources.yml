@@ -3,6 +3,10 @@ version: 2
 sources:
     - name: jaffle
       schema: RAW_SCHEMA
+      description: "Raw source data for the Jaffle Shop project. 
+      These tables are ingested as-is from the source system.
+      The staging models (stg_*) will transform them into clean, analytics-ready datasets."
+
       tables:
         - name: customers
           identifier: RAW_CUSTOMERS
