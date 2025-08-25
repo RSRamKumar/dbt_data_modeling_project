@@ -106,3 +106,12 @@ from sales_daily_summary sds
 join dim_dates dd on sds.date_sk = dd.date_sk
 order by sds.total_orders_count desc
 limit 1;
+
+
+
+-- Customers with highest average spend per order
+select customer_name, 
+       round(lifetime_total_amount / nullif(lifetime_orders_count, 0), 2) as avg_spend_per_order
+from customer_orders_summary
+order by avg_spend_per_order desc
+limit 5;
