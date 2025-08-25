@@ -115,3 +115,14 @@ select customer_name,
 from customer_orders_summary
 order by avg_spend_per_order desc
 limit 5;
+
+
+
+-- Product-Store combo with max sales
+select dp.product_name, ds.location_name, sum(fop.quantity * fop.product_price) as revenue
+from fct_order_products fop
+join dim_products dp on fop.product_sk = dp.product_sk
+join dim_stores ds on fop.store_sk = ds.store_sk
+group by dp.product_name, ds.location_name
+order by revenue desc
+limit 5;
