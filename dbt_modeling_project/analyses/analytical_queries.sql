@@ -97,3 +97,12 @@ from sales_store_summary sss
     join dim_stores ds on sss.store_sk = ds.store_sk
 order by sss.unique_customers_count desc
 limit 1;
+
+
+
+-- Day with the highest orders across all stores
+select dd.date_actual, sds.total_orders_count
+from sales_daily_summary sds
+join dim_dates dd on sds.date_sk = dd.date_sk
+order by sds.total_orders_count desc
+limit 1;
