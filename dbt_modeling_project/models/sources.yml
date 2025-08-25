@@ -8,8 +8,16 @@ sources:
       The staging models (stg_*) will transform them into clean, analytics-ready datasets."
 
       tables:
+
         - name: customers
           identifier: RAW_CUSTOMERS
+          description: Raw customers table containing one row per customer.
+          columns: 
+             - name: id
+               description: Unique identifier for each customer.
+             - name: name
+               description: Full name of the customer.
+
 
         - name: orders
           identifier: RAW_ORDERS
