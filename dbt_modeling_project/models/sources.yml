@@ -12,24 +12,28 @@ sources:
         - name: customers
           identifier: RAW_CUSTOMERS
           description: Raw customers table containing one row per customer.
-          columns: 
-             - name: id
-               description: Unique identifier for each customer.
-             - name: name
-               description: Full name of the customer.
 
 
         - name: orders
           identifier: RAW_ORDERS
+          description: Raw orders table containing one row per order. 
+
 
         - name: order_items
           identifier: RAW_ORDER_ITEMS
+          description: Line-level details of items within an order.
+
 
         - name: products
           identifier: RAW_PRODUCTS
+          description: Raw product master data. 
+
 
         - name: supplies
           identifier: RAW_SUPPLIES
+          description: Supplies data related to product sourcing and vendors.
+
 
         - name: stores
           identifier: RAW_STORES
+          description: Raw store master data with location details
