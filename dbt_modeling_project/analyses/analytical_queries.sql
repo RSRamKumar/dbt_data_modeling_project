@@ -103,15 +103,15 @@ limit 1;
 -- Day with the highest orders across all stores
 select dd.date_actual, sds.total_orders_count
 from sales_daily_summary sds
-join dim_dates dd on sds.date_sk = dd.date_sk
+    join dim_dates dd on sds.date_sk = dd.date_sk
 order by sds.total_orders_count desc
 limit 1;
 
 
 
 -- Customers with highest average spend per order
-select customer_name, 
-       round(lifetime_total_amount / nullif(lifetime_orders_count, 0), 2) as avg_spend_per_order
+select customer_name,
+    round(lifetime_total_amount / nullif(lifetime_orders_count, 0), 2) as avg_spend_per_order
 from customer_orders_summary
 order by avg_spend_per_order desc
 limit 5;
@@ -121,8 +121,8 @@ limit 5;
 -- Product-Store combo with max sales
 select dp.product_name, ds.location_name, sum(fop.quantity * fop.product_price) as revenue
 from fct_order_products fop
-join dim_products dp on fop.product_sk = dp.product_sk
-join dim_stores ds on fop.store_sk = ds.store_sk
+    join dim_products dp on fop.product_sk = dp.product_sk
+    join dim_stores ds on fop.store_sk = ds.store_sk
 group by dp.product_name, ds.location_name
 order by revenue desc
 limit 5;
