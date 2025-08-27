@@ -33,13 +33,25 @@ Medallion-style architecture is followed:
 
 
 
-📊 Final Schema: Star Schema
+📊 **Final Schema: Star Schema**
 
- - Fact tables: fact_orders, fact_order_items
- 
- - Dimension tables: dim_customers, dim_products, dim_stores, dim_dates
+- **Fact tables**
+  - `fct_orders` → 1 row = 1 customer order  
+  - `fct_order_items` → 1 row = 1 product sold in an order  
 
+- **Dimension tables**
+  - `dim_customers`  
+  - `dim_products`  
+  - `dim_stores`  
+  - `dim_dates`  
 
+- **Marts (Aggregates)**
+  - `customer_orders_summary` → Customer-level metrics  
+  - `store_sales_summary` → Store-level metrics  
+  - `daily_sales_summary` → Store × Day metrics (trend analysis)  
+  - `product_sales_summary` → Product-level metrics 
+
+---
 
 ## 📂 Data Source
 
