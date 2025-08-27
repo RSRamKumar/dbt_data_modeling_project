@@ -142,21 +142,23 @@ Snowflake connection settings are defined in your profiles.yml.
 ## 📈 Business Use Cases
 
   
+📊 Sales Analysis
 
-This warehouse supports analysis such as:
+  - Total sales by store, product, or customer
+  - Top-selling products (by revenue & items sold)
+  - Store performance over time (daily trends)
 
   
+👥 Customer Analytics
 
- - Total sales by store, product, or customer
-   
-     
-   
+ -  Top loyal customers (by order frequency)
+ -  High-value customers (by lifetime sales)
+ -  Customer lifetime value (CLV)
+ -  Customer shopping behavior (stores visited)
+  
  
- - Top-selling products and categories
-      
-        
-     
- - Customer lifetime value (CLV)
-         
-           
- - Average order value (AOV)
+💡 KPIs
+
+- Average order value (AOV)
+- Average items per order
+- Revenue contribution by product category
