@@ -8,7 +8,7 @@
 
   
 
-This project demonstrates a modern data warehouse on Snowflake using dbt for data modeling and transformation.
+This project demonstrates a modern data warehouse on **Snowflake** using **dbt** for data modeling and transformation.
 
   
 
@@ -25,14 +25,11 @@ Medallion-style architecture is followed:
 
   
 
- - Bronze (Raw / Source) → Raw ingestion tables (raw_customers,
-   raw_orders, etc.)
+ - **Bronze (Raw / Source)** → Raw ingestion tables (`raw_customers`, `raw_orders`, etc.)
    
- -  Silver (Staging + Intermediate) → Cleaned and transformed staging
-   models (stg_*) and business logic aggregations (inter_*)
+ -  **Silver (Staging + Intermediate)** → Cleaned staging models (`stg_*`) and business logic aggregations (`inter_*`)
      
- -  Gold (Marts) → Final dimensional models and fact tables (dim_*,
-   fact_*)
+ -  **Gold (Marts)** → Final dimensional models and fact tables (`dim_*`, `fct_*`, `*_summary`)
 
 
 
