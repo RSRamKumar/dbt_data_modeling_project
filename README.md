@@ -1,5 +1,9 @@
 # 🏪 Ecommerce Data Warehouse (Snowflake + dbt)
 
+🔹 **Tech stack**: Snowflake + dbt  
+🔹 **Data model**: Medallion architecture → Star schema  
+🔹 **Purpose**: Analytics-ready sales data for Shop (fictitious e-commerce store)
+
 ## 📌 Project Overview
 
   
@@ -36,7 +40,7 @@ Medallion-style architecture is followed:
 
  - Fact tables: fact_orders, fact_order_items
  
- -  Dimension tables: dim_customers, dim_products, dim_stores, dim_dates
+ - Dimension tables: dim_customers, dim_products, dim_stores, dim_dates
 
 
 
@@ -50,8 +54,8 @@ The dataset contains 6 raw tables loaded into Snowflake:
  - raw_orders    
  - raw_order_items    
  - raw_products   
- -  raw_supplies   
- -   raw_stores
+ - raw_supplies   
+ - raw_stores
 
 
 ## 🔄 Modeling Layers
