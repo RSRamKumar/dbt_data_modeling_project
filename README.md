@@ -59,23 +59,22 @@ Medallion-style architecture is followed:
 
 The dataset contains 6 raw tables loaded into Snowflake:
 
- - raw_customers
- - raw_orders    
- - raw_order_items    
- - raw_products   
- - raw_supplies   
- - raw_stores
+- `raw_customers`  
+- `raw_orders`  
+- `raw_order_items`  
+- `raw_products`  
+- `raw_supplies`  
+- `raw_stores`
 
+---
 
 ## 🔄 Modeling Layers
 
-### 1. Bronze (Raw Data)
+### 1. **Bronze (Raw Data)**
 
 Data is loaded directly into Snowflake from CSVs
 
-### 2. Silver (Staging + Intermediate)
-
-  
+### 2. **Silver (Staging + Intermediate)** 
 
  - Staging models (stg_*) → Standardize column names, enforce data
    types, add load timestamps
@@ -87,27 +86,14 @@ Data is loaded directly into Snowflake from CSVs
     -  inter_product_sales_agg: 1 row = 1 product with sales stats
     
 
-### 3. Gold (Fact & Dimension Tables)
+### 3. **Gold (Facts, Dimensions & Marts)** 
 
-   - Dimension Tables:
-
-  - dim_customers
-  -  dim_products
-  -   dim_stores
-  -  dim_dates
+- Dimension tables: `dim_customers`, `dim_products`, `dim_stores`, `dim_dates` 
+- Fact tables: `fct_orders` (One row = one customer order), `fct_order_items` (One row = one product sold in an order) 
+- Marts: `customer_orders_summary`, `store_sales_summary`, `daily_sales_summary`, `product_sales_summary`  
 
 
- - Fact Tables:
-
-	 - fact_orders: One row = one customer order 
-	 - fact_order_items: One row = one product sold in an order
-
-  
-Marts:
-
- - customer_orders_summary 
- - store_sales_summary
- - daily_sales_summary
+--- 
 
 
 ## ⚡ How to Run
