@@ -95,7 +95,20 @@ Data is loaded directly into Snowflake from CSVs
 
 --- 
 
+## 🛠️ Utilities
 
+- **Macros**
+       - `convert_cents_to_euros(price_in_cents)` → Converts integer price in cents to Euro value.
+
+--- 
+## ✅ Testing
+
+Data quality is enforced through **dbt tests**:
+- **Unique & not_null constraints** → on surrogate keys (`*_sk`)  
+- **Referential integrity** → foreign key relationships between fact and dimension tables  
+- **No duplicates** → enforced at staging and marts level
+  
+  
 ## ⚡ How to Run
 
   
