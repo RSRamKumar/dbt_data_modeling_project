@@ -52,6 +52,7 @@ Medallion-style architecture is followed:
   - `product_sales_summary` → Product-level metrics 
 
 ---
+## Models DAG
 <img width="1797" height="691" alt="image" src="https://github.com/user-attachments/assets/553e9d21-2f27-4745-b243-9ea157450dbd" />
 
 ---
