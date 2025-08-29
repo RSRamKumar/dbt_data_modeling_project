@@ -17,7 +17,8 @@ select
     op.product_sk,
     dp.product_name,
     sum(op.quantity) as total_quantity_sold,
-    sum(op.quantity * op.product_price) as product_revenue
+    sum(op.quantity * op.product_price) as product_revenue,
+    current_timestamp() as load_timestamp
 from order_products op
     join dim_products dp
     on op.product_sk = dp.product_sk

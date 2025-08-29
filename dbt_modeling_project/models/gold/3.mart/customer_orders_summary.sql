@@ -19,7 +19,8 @@ select
     csb.recent_order_date,
     csb.lifetime_orders_count,
     csb.lifetime_total_amount,
-    csb.customer_activespan_days
+    csb.customer_activespan_days,
+    current_timestamp() as load_timestamp
 from customer_summary_base csb
     join {{ ref('dim_customers') }} dc using (customer_sk)
 
