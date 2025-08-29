@@ -20,7 +20,7 @@ select
     ds.location_name,
 
     -- Core metrics and KPI metrics
-   {{ order_metrics("o") }},
+    {{ order_metrics("o") }},
 
     current_timestamp() as load_timestamp
 
