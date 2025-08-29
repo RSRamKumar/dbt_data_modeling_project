@@ -19,15 +19,8 @@ select
     o.store_sk,
     ds.location_name,
 
-    -- Core metrics
-    sum(o.order_total_amount) as total_sales_amount,
-    sum(o.total_items_count) as total_items_sold,
-    count(distinct o.order_id) as total_orders_count,
-    count(distinct o.customer_sk) as unique_customers_count,
-
-    -- KPI metrics
-    round(sum(o.order_total_amount) / nullif(count(distinct o.order_id), 0), 2) as avg_order_value,
-    round(sum(o.total_items_count) / nullif(count(distinct o.order_id), 0), 2) as avg_items_per_order,
+    -- Core metrics and KPI metrics
+   {{ order_metrics("o") }},
 
     current_timestamp() as load_timestamp
 
