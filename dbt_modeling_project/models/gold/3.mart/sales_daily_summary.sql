@@ -16,15 +16,10 @@ select
     o.date_sk,
     o.store_sk,
 
-    -- Core metrics
-    sum(o.order_total_amount) as total_sales_amount,
-    sum(o.total_items_count) as total_items_sold,
-    count(distinct o.order_id) as total_orders_count,
-    count(distinct o.customer_sk) as unique_customers_count,
+    -- Core metrics and KPI metrics
+    {{ order_metrics("o") }},
 
-    -- KPI metrics
-    round(sum(o.order_total_amount) / nullif(count(distinct o.order_id), 0), 2) as avg_order_value,
-    round(sum(o.total_items_count) / nullif(count(distinct o.order_id), 0), 2) as avg_items_per_order
+    current_timestamp() as load_timestamp
 
 from orders o
 group by o.date_sk, o.store_sk
