@@ -116,3 +116,64 @@ models:
 
         - name: load_timestamp
           description: Timestamp when the record was last loaded into the warehouse.  
+
+
+
+
+  - name: store_sales_summary
+    description: >
+      Gold mart model. One row per store, containing overall sales and KPI metrics
+      (e.g. total sales, items, orders, customers, avg order value, etc.).
+    columns:
+      - name: store_sk
+        description: Surrogate key for the store (joins to dim_stores).
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('dim_stores')
+              field: store_sk
+
+      - name: location_name
+        description: Store’s location or branch name.
+        tests:
+          - accepted_values: 
+                values: ['San Francisco', 'Brooklyn', 'Chicago', 'Los Angeles', 'New Orleans', 'Philadelphia']
+                     
+
+      - name: total_sales_amount
+        description: Total sales amount (in euros) for the store across all orders.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_items_sold
+        description: Total number of items sold by the store.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_orders_count
+        description: Total number of distinct orders served by the store.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: unique_customers_count
+        description: Number of unique customers who placed orders at the store.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: avg_order_value
+        description: Average order value (sales amount / orders) for the store.
+
+      - name: avg_items_per_order
+        description: Average number of items per order for the store.
+
+      - name: load_timestamp
+        description: Timestamp when the record was last loaded into the warehouse.
