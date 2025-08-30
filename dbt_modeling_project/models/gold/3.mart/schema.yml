@@ -54,3 +54,65 @@ models:
         tests:
           - dbt_utils.expression_is_true:
               expression: ">= 0"
+       
+      - name: load_timestamp
+        description: Timestamp when the record was last loaded into the warehouse.
+
+
+  - name: sales_daily_summary
+    description: >
+            Gold mart model. One row per store per order date, containing sales and KPI metrics
+            (e.g. total sales, total items, orders, unique customers, avg order value).
+    columns:
+        - name: date_sk
+          description: Surrogate key referencing the order date.
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_dates')
+                field: date_sk
+
+        - name: store_sk
+          description: Surrogate key for the store.
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_stores')
+                field: store_sk
+
+        - name: total_sales_amount
+          description: Total sales amount (in euros) for that store and date.
+          tests:
+            - not_null
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+
+        - name: total_items_sold
+          description: Total number of items sold for that store and date.
+          tests:
+            - not_null
+            - dbt_utils.expression_is_true:
+                    expression: ">= 0"
+
+        - name: total_orders_count
+          description: Total number of distinct orders for that store and date.
+          tests:
+            - not_null
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+
+        - name: unique_customers_count
+          description: Number of unique customers who placed orders at that store and date.
+          tests:
+            - not_null
+            - dbt_utils.expression_is_true:
+                    expression: ">= 0"
+
+        - name: avg_order_value
+          description: Average order value (sales amount / orders) for that store and date.
+
+        - name: avg_items_per_order
+          description: Average number of items per order for that store and date.
+
+        - name: load_timestamp
+          description: Timestamp when the record was last loaded into the warehouse.  

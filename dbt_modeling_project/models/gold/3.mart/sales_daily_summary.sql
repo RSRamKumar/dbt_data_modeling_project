@@ -1,4 +1,4 @@
--- daily_sales_summary.sql
+-- sales_daily_summary.sql
 -- Grain: 1 row per store_id per order_date
 
 with orders as (
