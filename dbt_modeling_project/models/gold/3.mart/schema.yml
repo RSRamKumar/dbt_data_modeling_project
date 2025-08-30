@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: customer_orders_summary
+    description: >
+      Gold mart model. One row per customer containing their first order date,
+      most recent order date, lifetime sales metrics, and active span.
+    columns:
+      - name: customer_sk
+        description: Surrogate key for the customer (joins to dim_customers).
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
+
+      - name: customer_id
+        description: Natural business key for the customer.
+        tests:
+          - not_null
+
+      - name: customer_name
+        description: Full name of the customer.
+
+      - name: first_order_date
+        description: The date of the customer's very first order.
+
+      - name: recent_order_date
+        description: The date of the customer's most recent order.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "<= current_date"
+
+      - name: lifetime_orders_count
+        description: Total number of distinct orders placed by the customer.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: lifetime_total_amount
+        description: Lifetime sum of order amounts for the customer.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: customer_activespan_days
+        description: >
+          Number of days between the customer's first and most recent order.
+          Represents how long the customer has been active.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"

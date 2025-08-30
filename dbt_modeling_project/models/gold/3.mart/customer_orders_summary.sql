@@ -6,7 +6,7 @@ with customer_summary_base as (
             max(dd.date_actual) as recent_order_date,
             count(distinct fo.order_id) as lifetime_orders_count,
             sum(fo.order_total_amount) as lifetime_total_amount,
-            datediff('day', min(dd.date_actual), max(dd.date_actual)) as customer_active_span
+            datediff('day', min(dd.date_actual), max(dd.date_actual)) as customer_activespan_days
         from {{ ref('fct_orders') }} fo
             join {{ ref('dim_dates') }} dd using (date_sk)
         group by fo.customer_sk
