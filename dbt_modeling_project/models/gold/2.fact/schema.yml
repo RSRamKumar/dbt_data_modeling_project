@@ -16,14 +16,23 @@ models:
         description: Surrogate key of the order date (joins to dim_dates).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_dates')
+              field: date_sk
       - name: customer_sk
         description: Surrogate key of the customer (joins to dim_customers).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
       - name: store_sk
         description: Surrogate key of the store (joins to dim_stores).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_stores')
+              field: store_sk
       - name: order_total_amount
         description: Total value of the order in euros.
         tests:
@@ -63,22 +72,37 @@ models:
         description: Business key of the order (joins to fct_orders).
         tests:
           - not_null
+          - relationships:
+              to: ref('fct_orders')
+              field: order_id
       - name: date_sk
         description: Surrogate key of the order date (joins to dim_dates).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_dates')
+              field: date_sk
       - name: customer_sk
         description: Surrogate key of the customer (joins to dim_customers).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
       - name: product_sk
         description: Surrogate key of the product (joins to dim_products).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
       - name: store_sk
         description: Surrogate key of the store (joins to dim_stores).
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_stores')
+              field: store_sk
       - name: quantity
         description: Number of units of the product in this order.
         tests:
