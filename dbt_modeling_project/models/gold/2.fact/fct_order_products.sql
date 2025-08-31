@@ -1,5 +1,5 @@
 
--- fact_order_items.sql 
+-- fct_order_items.sql 
 -- grain =  1 row per (order_id, product_id)  -- one record per unique product within an order
 
 

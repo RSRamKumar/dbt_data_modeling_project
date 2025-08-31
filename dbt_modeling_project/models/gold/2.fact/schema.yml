@@ -1,0 +1,99 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      Fact table with one row per order. Contains surrogate keys for customer,
+      store, and date, along with order-level measures like order amount and
+      item counts.
+    columns:
+      - name: order_id
+        description: Business key of the order.
+        tests:
+          - not_null
+          - unique
+      - name: date_sk
+        description: Surrogate key of the order date (joins to dim_dates).
+        tests:
+          - not_null
+      - name: customer_sk
+        description: Surrogate key of the customer (joins to dim_customers).
+        tests:
+          - not_null
+      - name: store_sk
+        description: Surrogate key of the store (joins to dim_stores).
+        tests:
+          - not_null
+      - name: order_total_amount
+        description: Total value of the order in euros.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: number_of_jaffles
+        description: Number of jaffles in the order.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: number_of_beverages
+        description: Number of beverages in the order.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: unique_products_count
+        description: Count of distinct products in the order.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: total_items_count
+        description: Total items (all products) in the order.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: load_timestamp
+        description: Timestamp when the fact table was loaded.
+
+  - name: fct_order_items
+    description: >
+      Fact table at the order-item grain (one row per product in an order).
+      Contains surrogate keys for product, customer, store, and date, with
+      measures like quantity and item-level totals.
+    columns:
+      - name: order_id
+        description: Business key of the order (joins to fct_orders).
+        tests:
+          - not_null
+      - name: date_sk
+        description: Surrogate key of the order date (joins to dim_dates).
+        tests:
+          - not_null
+      - name: customer_sk
+        description: Surrogate key of the customer (joins to dim_customers).
+        tests:
+          - not_null
+      - name: product_sk
+        description: Surrogate key of the product (joins to dim_products).
+        tests:
+          - not_null
+      - name: store_sk
+        description: Surrogate key of the store (joins to dim_stores).
+        tests:
+          - not_null
+      - name: quantity
+        description: Number of units of the product in this order.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: product_price
+        description: Price of the product (in euros).
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: item_total
+        description: Revenue for this product in this order (quantity * price).
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"

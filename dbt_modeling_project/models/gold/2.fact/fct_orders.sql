@@ -1,4 +1,4 @@
--- fact_orders.sql one row per order
+-- fct_orders.sql one row per order
 -- Fact table with surrogate keys for customer, product
 with enriched_orders as (
         select
