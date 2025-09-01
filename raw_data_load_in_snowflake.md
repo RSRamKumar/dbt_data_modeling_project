@@ -3,7 +3,9 @@ USE WAREHOUSE COMPUTE_WH;
 USE DATABASE jaffle;
 USE SCHEMA raw_schema;
 
+
 -- Create our input tables and import the data from S3
+
 
 -- raw_customers table 
 CREATE OR REPLACE TABLE raw_customers
