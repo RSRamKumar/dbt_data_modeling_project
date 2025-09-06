@@ -5,7 +5,7 @@
 
 {{ config(
     materialized = 'incremental',
-    unique_key = ['order_id', 'product_sk'],
+    unique_key = ['date_sk', 'product_sk'],
     on_schema_change = 'append_new_columns'
 ) }}
 
