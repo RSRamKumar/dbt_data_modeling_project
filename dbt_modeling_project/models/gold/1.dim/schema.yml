@@ -56,7 +56,7 @@ models:
   - name: dim_products
     description: >
       Dimension table for products. Contains surrogate keys, descriptive
-      attributes, and current pricing information.
+      attributes, and current pricing information.  
     columns:
       - name: product_sk
         description: Surrogate key for the product (used in fact tables).
@@ -78,6 +78,9 @@ models:
           - not_null
           - dbt_utils.expression_is_true:
               expression: ">= 0"
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 4
+              max_value: 14
       - name: load_timestamp
         description: Timestamp when the dimension record was loaded.
 
