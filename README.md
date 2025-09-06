@@ -8,13 +8,10 @@
 
   
 
-This project demonstrates a modern data warehouse on **Snowflake** using **dbt** for data modeling and transformation.
+This project demonstrates a modern data warehouse on **Snowflake** using **dbt** for data modeling and transformation, testing, and documentation.
 
-  
 
-The Jaffle Shop dataset (a fictitious e-commerce store) to model sales transactions into a star schema with fact and dimension tables is used.
-
-  
+The dataset is based on the Jaffle Shop (a fictitious e-commerce store) and is modeled into a **star schema** with fact and dimension tables, plus aggregated marts for business analytics.
   
 
 ## 🏗️ Architecture
@@ -29,7 +26,7 @@ Medallion-style architecture is followed:
    
  -  **Silver (Staging + Intermediate)** → Cleaned staging models (`stg_*`) and business logic aggregations (`inter_*`)
      
- -  **Gold (Marts)** → Final dimensional models and fact tables (`dim_*`, `fct_*`, `*_summary`)
+ -  **Gold (Warehouse / Marts)** → Final dimensional models, fact tables, and aggregate marts (`dim_*`, `fct_*`, `*_summary`)
 
 
 
@@ -103,15 +100,19 @@ Data is loaded directly into Snowflake from CSVs
 - **Macros**
        - `convert_cents_to_euros(price_in_cents)` → Converts integer price in cents to Euro value.
 
+
 --- 
 ## ✅ Testing
 
 Data quality is enforced through **dbt tests**:
-- **Unique & not_null constraints** → on surrogate keys (`*_sk`)  
-- **Referential integrity** → foreign key relationships between fact and dimension tables  
-- **No duplicates** → enforced at staging and marts level
+
+- ** Generic Tests: **
+  - **Unique & not_null constraints** → on surrogate keys (`*_sk`)  
+  - **Referential integrity** → foreign key relationships between fact and dimension tables  
+  - **No duplicates** → enforced at staging and marts level
   
-  
+- **dbt-expectations tests**
+
 ## ⚡ How to Run
 
   
