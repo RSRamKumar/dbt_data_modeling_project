@@ -23,6 +23,7 @@ models:
       - name: load_timestamp
         description: Timestamp when the dimension record was loaded.
 
+
   - name: dim_dates
     description: >
       Date dimension table spanning from 2016-01-01 to 2025-12-31. Provides
@@ -52,6 +53,7 @@ models:
         description: Quarter of the year (1–4).
       - name: load_timestamp
         description: Timestamp when the dimension record was loaded.
+
 
   - name: dim_products
     description: >
@@ -88,6 +90,7 @@ models:
               column_type: number
       - name: load_timestamp
         description: Timestamp when the dimension record was loaded.
+
 
   - name: dim_stores
     description: >
