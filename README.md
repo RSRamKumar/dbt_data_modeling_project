@@ -106,7 +106,7 @@ Data is loaded directly into Snowflake from CSVs
 
 Data quality is enforced through **dbt tests**:
 
-- ** Generic Tests: **
+- **Generic Tests:**
   - **Unique & not_null constraints** → on surrogate keys (`*_sk`)  
   - **Referential integrity** → foreign key relationships between fact and dimension tables  
   - **No duplicates** → enforced at staging and marts level
