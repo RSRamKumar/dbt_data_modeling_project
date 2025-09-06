@@ -104,7 +104,7 @@ models:
       - name: location_name
         description: Human-readable location name for the store.
         tests:
-          - accepted_values:
-              values: ["San Francisco", "Brooklyn", "Chicago", "Los Angeles", "New Orleans", "Philadelphia"]
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ["San Francisco", "Brooklyn", "Chicago", "Los Angeles", "New Orleans", "Philadelphia"]
       - name: load_timestamp
         description: Timestamp when the dimension record was loaded.
