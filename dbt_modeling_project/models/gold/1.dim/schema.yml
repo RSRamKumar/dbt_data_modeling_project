@@ -72,6 +72,9 @@ models:
         description: Name of the product.
       - name: product_type
         description: Type/category of the product (e.g., Jaffle, Beverage).
+        tests:
+          - dbt_expectations.expect_column_distinct_count_to_equal:
+              value: 2
       - name: product_price
         description: Price of the product (in euros).
         tests:
